@@ -1,7 +1,7 @@
 ---
 layout: essay
 type: essay
-title: "JavaScript is not typesafe"
+title: "JavaScript Is Not Typesafe"
 # All dates must be YYYY-MM-DD format!
 date: 2024-01-17
 published: true
