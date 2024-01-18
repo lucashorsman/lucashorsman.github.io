@@ -10,7 +10,7 @@
     "location": { "address": "", "postalCode": "96822", "city": "Honolulu", "countryCode": "USA", "region": "Hawaii" },
     "profiles": [
       { "network": "github", "username": "lucashorsman", "url": "http://github.com/lucashorsman" },
-      { "network": "linkedin", "username": "mollymaluhia", "url": "https://www.linkedin.com/in/lucas-horsman-b9b09523a/" }
+      { "network": "linkedin", "username": "lucashorsman", "url": "https://www.linkedin.com/in/lucas-horsman-b9b09523a/" }
 
     ]
   },
