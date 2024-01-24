@@ -2,13 +2,14 @@
 layout: project
 type: project
 image: img/cotton/cotton-square.png
-title: "Cotton"
-date: 2014
+title: "Spinitron Playlist Generator"
+date: 2023
 published: true
 labels:
-  - Lisp
+  -Spotipy
+  -Python
   - GitHub
-summary: "A text adventure game that I developed for ICS 313."
+summary: "This script automates the creation of a Spotify playlist by extracting songs from a Spinitron show."
 ---
 
 <img class="img-fluid" src="../img/cotton/cotton-header.png">
