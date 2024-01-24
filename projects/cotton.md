@@ -30,4 +30,4 @@ This script looks at the spinitron page for a show, decodes some HTML on the pag
 
 <hr>
 
-Source: <a href="https://github.com/lucashorsman/SpinitronPlaylistGenerator"><i class="large github icon "></i>jogarces/ics-313-text-game</a>
+Source: <a href="https://github.com/lucashorsman/SpinitronPlaylistGenerator"><i class="large github icon "></i>lucashorsman/SpinitronPlaylistGenerator</a>
