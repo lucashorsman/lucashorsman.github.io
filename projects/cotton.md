@@ -12,19 +12,18 @@ labels:
 summary: "A script that automatically generates a playlist from Spinitron."
 ---
 
-<img class="img-fluid" src="../img/cotton/cotton-header.png">
+
 
 This script automates the creation of a Spotify playlist by extracting songs from a Spinitron show. Users can provide a Spinitron show URL (e.g., [https://spinitron.com/KTUH/pl/18030348/In-The-Garage](https://spinitron.com/KTUH/pl/18030348/In-The-Garage)), and the script will gather all the songs from that show and generate a corresponding playlist in their Spotify account.
-//whats spinitron?
-//why
-
+<hr>Why?</hr>
+I made this tool to assist me and other DJ's in automating their playlist generation, with the intention of making these playlists for members of the community, increasing the level of engagement a listener can have with the show. As a KTUH DJ, we don't typically use a playlisting software but instead rely on a primarily physical collection of music. This meant that making a playlist for preservation or sharing often involved a tedious process of taking note of each song played then adding it to a Spotify playlist. 
 //how
 
-<hr>
+
 
 <pre>
 </pre>
 
 <hr>
 
-Source: <a href="https://bloximages.newyork1.vip.townnews.com/insideradio.com/content/tncms/assets/v3/editorial/d/62/d62d3daa-cac1-11e5-a4f8-4b6d3b61f5b5/56b2790a46447.image.jpg?crop=375%2C197%2C0%2C66&resize=375%2C197&order=crop%2Cresize"><i class="large github icon "></i>jogarces/ics-313-text-game</a>
+Source: <a href="https://github.com/jogarces/ics-313-text-game"><i class="large github icon "></i>jogarces/ics-313-text-game</a>
