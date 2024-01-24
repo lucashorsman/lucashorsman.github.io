@@ -14,7 +14,7 @@ summary: "This script automates the creation of a Spotify playlist by extracting
 
 <img class="img-fluid" src="../img/cotton/cotton-header.png">
 
-Cotton is a horror-style text-based adventure game I developed using the functions and macros built from The Wizard's Game in [Conrad Barski's Land of Lisp](http://landoflisp.com/). Slightly more interesting and convoluted! (It is not that scary.)
+This script automates the creation of a Spotify playlist by extracting songs from a Spinitron show. Users can provide a Spinitron show URL (e.g., https://spinitron.com/KTUH/pl/18030348/In-The-Garage), and the script will gather all the songs from that show and generate a corresponding playlist in their Spotify account.
 
 To give you a flavor of the game, here is an excerpt from one run:
 
