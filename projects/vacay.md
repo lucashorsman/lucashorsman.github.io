@@ -10,7 +10,7 @@ labels:
   - Meteor
   - MongoDB
   - GitHub
-summary: "A responsive web application for travel planning that my team developed in ICS 415."
+summary: "In my senior year of high school, I was a leader of Saber Dynamics at James Campbell High School."
 ---
 
 <img class="img-fluid" src="../img/vacay/saberdynamics.webp">
