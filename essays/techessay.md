@@ -16,3 +16,6 @@ I also find satisfaction in the marriage of code and music. Using algorithms to 
 Back in high school, I got into robotics. Programming robots turned out to be pretty neat, especially when you see lines of code translating into real-world actions. It's not as fancy as it sounds, but it's a practical side of coding that fascinates me.
 
 Looking forward, finishing and publishing my game is my next big challenge (after classes of course). I'll keep toying with music-related code because, well, it's enjoyable. And when it comes to robotics, I'm eager to dive deeper into making code work seamlessly in the physical world. My journey in software engineering is a mix of curiosity, hands-on experience, and the drive to keep learning in a down-to-earth way.
+
+
+--GPT assisted in clean-up of this essay
