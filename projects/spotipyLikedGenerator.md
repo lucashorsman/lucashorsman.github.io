@@ -1,8 +1,8 @@
 ---
 layout: project
 type: project
-# image: img/cotton/djsky.jpg
-title: "Spinitron Playlist Generator"
+image: img/cotton/djsky.jpg
+title: "Liked Song Playlist Generator"
 date: 2023
 published: true
 labels:
@@ -11,7 +11,7 @@ labels:
   - GitHub
 summary: "This script scans through your liked songs on Spotify and creates dedicated playlists for your favorite artists."
 ---
-<img width= "400px" src="../img/cotton/spotifyplaylist.png" class="img-thumbnail" >
+<img width= "400px" src="../img/cotton/likedsongcsh.png" class="img-thumbnail" >
 
 <hr>
 
@@ -25,10 +25,10 @@ After obtaining the artist's URI, the script creates a new public playlist with 
 # Credential Requirements and Spotipy Library Usage
 To use this script, users need to have Spotify API credentials, including a client ID and client secret, which can be obtained by creating a Spotify Developer account. The script utilizes the Spotipy library to interact with the Spotify API and prompt users for necessary information. 
 
-Overall, the "Spotify Liked Artist Playlist Generator" simplifies the process of creating personalized playlists based on your favorite artists, providing a more tailored and enjoyable listening experience on Spotify.
+Overall, the script simplifies the process of creating personalized playlists based on your favorite artists, providing a more tailored and enjoyable listening experience on Spotify.
 <pre>
 </pre>
 
 <hr>
 
-Source: <a href="https://github.com/lucashorsman/SpinitronPlaylistGenerator"><i class="large github icon "></i>lucashorsman/SpinitronPlaylistGenerator</a>
+Source: <a href="https://github.com/lucashorsman/Spotify-Liked-Artist-Playlist-Generator"><i class="large github icon "></i>lucashorsman/LikedSongGenerator</a>
