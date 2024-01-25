@@ -11,7 +11,7 @@ labels:
   - GitHub
 summary: "This script scans through your liked songs on Spotify and creates dedicated playlists for your favorite artists."
 ---
-<img width= "400px" src="../img/cotton/likedsongcsh.png" class="img-thumbnail" >
+<img width= "400px" src="../img/cotton/likedsongscsh.png" class="img-thumbnail" >
 
 <hr>
 
