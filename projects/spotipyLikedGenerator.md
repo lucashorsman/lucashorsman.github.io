@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/cotton/djsky.jpg
+image: img/Spotify_icon.svg.webp
 title: "Liked Song Playlist Generator"
 date: 2023
 priority: 2
