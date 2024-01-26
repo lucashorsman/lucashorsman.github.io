@@ -31,7 +31,7 @@ The Stack Overflow question ["How does the final keyword in Java work? I can sti
 
 Responses to this smart question are likely to be more informative and helpful due to the detailed nature of the inquiry, fostering a positive exchange of knowledge.
 
-# Example 2: The Dumb Question
+# Example 2: The Not So Smart Question
 
 Contrastingly, the Stack Overflow question ["Please tell me about this exception"](https://stackoverflow.com/questions/3402945/please-tell-me-about-this-exception) lacks the characteristics of a smart question:
 
