@@ -35,4 +35,4 @@ Overall, the script simplifies the process of creating personalized playlists ba
 Source: <a href="https://github.com/lucashorsman/Spotify-Liked-Artist-Playlist-Generator"><i class="large github icon "></i>lucashorsman/LikedSongGenerator</a>
 
 
---GPT assisted in clean-up of this essay
+--GPT assisted in clean-up of this write-up

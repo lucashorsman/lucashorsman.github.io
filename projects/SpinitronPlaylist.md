@@ -34,4 +34,4 @@ This script looks at the spinitron page for a show, decodes some HTML on the pag
 Source: <a href="https://github.com/lucashorsman/SpinitronPlaylistGenerator"><i class="large github icon "></i>lucashorsman/SpinitronPlaylistGenerator</a>
 
 
---GPT assisted in clean-up of this essay
+--GPT assisted in clean-up of this write-up
