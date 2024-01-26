@@ -4,6 +4,7 @@ type: project
 image: img/cotton/djsky.jpg
 title: "Spinitron Playlist Generator"
 date: 2023
+priority: 1
 published: true
 labels:
   - Python

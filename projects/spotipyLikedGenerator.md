@@ -4,6 +4,7 @@ type: project
 image: img/cotton/djsky.jpg
 title: "Liked Song Playlist Generator"
 date: 2023
+priority: 2
 published: true
 labels:
   - Python

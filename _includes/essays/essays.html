@@ -7,7 +7,7 @@
     </div>
 
     <div class="row g-3">
-      {% assign essay_pages = site.pages | where: "type", "essay" | sort: "date" | reverse %}
+      {% assign essay_pages = site.pages | where: "type", "essay" | sort: "priority" | reverse %}
       {% for page in essay_pages %}
         {% unless page.draft %}
           {% include essays/essay-card.html page=page %}
