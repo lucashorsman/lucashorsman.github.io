@@ -19,11 +19,11 @@ This script automates the creation of a Spotify playlist by extracting songs fro
 
 # Why?
 
-I am a DJ with KTUH. I made this tool to assist me and other DJ's in automating their playlist generation, with the intention of making these playlists for members of the community, increasing the level of engagement a listener can have with the show. As a KTUH DJ, we don't typically use a playlisting software but instead rely on a primarily physical collection of music. This meant that making a playlist for preservation or sharing often involved a tedious process of taking note of each song played then adding it to a Spotify playlist. 
+I am a DJ with KTUH, the student led radio station at the University of Hawaii at Manoa. I made this tool to assist me and other DJ's in automating their playlist generation, with the intention of making these playlists for members of the community, increasing the level of engagement a listener can have with the show. As a KTUH DJ, we don't typically use a playlisting software but instead rely on a primarily physical collection of music. This meant that making a playlist for preservation or sharing often involved a tedious process of taking note of each song played then adding it to a Spotify playlist. 
 
 # How?
 
-This script looks at the spinitron page for a show, decodes some HTML on the page to get the song title and artist name for each song played during the show timespan. Next, it uses spotipy, which is a python library that interfaces with the Spotify API, to 'search' for each of these songs using the text from earlier. Meaning, it finds each of the songs inside Spotify's database. Once a match for each song is found, it is added to a new playlist on the user's Spotify account. It's pretty fun to watch it populate.
+This script looks at the Spinitron page for a show, decodes some HTML on the page to get the song title and artist name for each song played during the show timespan. Next, it uses Spotipy, which is a Python library that interfaces with the Spotify API, to 'search' for each of these songs using the text from earlier. Meaning, it finds each of the songs inside Spotify's database. Once a match for each song is found, it is added to a new playlist on the user's Spotify account. It's pretty fun to watch it populate.
 
 
 <pre>
