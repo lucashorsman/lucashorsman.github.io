@@ -28,33 +28,79 @@
       "name": "Toolsets/OS",
       "keywords": [ "Windows", "Git/GitHub", "g++"  ]
     }
-  ],
-  "education": [
+  ],"education": [
     {
-      "institution": "University of Hawaii, Honolulu, HI",
-      "area": "Computer Science (expected Spring, 2026)",
-      "studyType": "B.S.",
-      "startDate": "2022-8-1",
-      "endDate": "Present",
-      "courses": [
-      ]
+      "institution": "UH Manoa",
+      "startDate": "August 2022",
+      "degree": "Working towards a BS in Computer Science",
+      "gpa": "3.54"
+    },
+    {
+      "institution": "James Campbell High School",
+      "location": "Ewa Beach, HI",
+      "startDate": "August 2020",
+      "endDate": "May 2022",
+      "honors": ["Summa Cum Laude", "Academic & CTE Honors", "Principals List"],
+      "gpa": "3.93"
     }
   ],
   "work": [
     {
-      
+      "company": "Center for Language & Technology",
+      "position": "Computer Lab Monitor",
+      "startDate": "August 2022",
+      "endDate": "current"
+    },
+    {
+      "company": "HMSA",
+      "position": "Data Entry Specialist",
+      "startDate": "June 2022",
+      "endDate": "August 2023"
+    },
+    {
+      "company": "Saber Dynamics",
+      "position": "Head Programmer",
+      "startDate": "September 2021",
+      "endDate": "April 2022",
+      "responsibilities": [
+        "Developed the robot’s primary control system, autonomous control, and auxiliary functions through expert programming, driving efficient and effective performance of the club's robotic systems.",
+        "Demonstrated strong leadership skills by training the electronics team on electrical and pneumatic systems for the robot, enhancing the team's technical knowledge and abilities.",
+        "Created and implemented innovative solutions to complex problems, streamlining testing processes and contributing to the club's success."
+      ]
     }
   ],
   "volunteer": [
-   
+    {
+      "organization": "Ewa Beach Drive in Theater",
+      "position": "Chief Technology Officer",
+      "startDate": "September 2020",
+      "endDate": "April 2022",
+      "responsibilities": [
+        "Orchestrated all A/V needs for the theater, ensuring seamless and high-quality movie experiences for patrons.",
+        "Revitalized the theater's online presence by designing and regularly updating the theater's website, increasing visibility and sales.",
+        "Provided instruction to students on how to operate theater equipment such as projectors and headphones, enriching their knowledge and experience in audio-visual technologies."
+      ]
+    }
   ],
   "awards": [
     {
-    }
-  ],
-  "references": [
+      "title": "FRC  Robotics Regional Champion",
+      "date": "April 2022"
+    },
     {
-      "name": "Available upon request"
+      "title": "Pele Award Winner",
+      "event": "Pele Awards",
+      "date": "May 2022"
+    },
+    {
+      "title": "Congressional Art Contest",
+      "event": "Bishop Museum",
+      "date": "April 2022"
+    },
+    {
+      "title": "Robotics Skills Champion",
+      "event": "Vex Robotics Competition",
+      "date": "March 2020"
     }
   ]
 }
