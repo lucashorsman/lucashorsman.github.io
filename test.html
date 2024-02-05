@@ -1,0 +1,207 @@
+<div class="win95 window">
+    <div class="win95 titleBar">⭐ a window lol</div>
+    <div>welcom 2 winblows</div>
+
+    <div class="win95 scrollBox">
+    
+        <div class="boxContent">
+        
+            <div>-custom scrollbars-
+                <br>
+                <p>firefox allows you to change the color of scrollbars and switch between 2 (very thin) thickness options.</p>
+                <p>but you can't customize them completely like you can with webkit on chromium.</p>
+                <p>this box uses a custom scrollbar i made!</p>
+                <p>using a range &lt;input&gt; element and some javascript</p>
+                <p>the &lt;script&gt; is the last element in the body of this page</p>
+                <p>you can still use this in places that allow css but no javascript, the scrollbars will only be cosmetic</p>
+                <br>
+            </div>
+        </div>
+        <input type="range" orient="vertical" class="scrollBar">
+    </div>
+</div>
+<object id="melonland-surf-club" data="https://melonland.net/surf-badge.svg?fill=#211759" type="image/svg+xml" style="width: 100px; height: 100px;"></object>
+
+<style>
+
+/* Background and overall layout */
+
+html {
+  background: #5aa;
+  font-family: monospace;
+  font-size: 9pt;
+  /* background-image: url("/img/2x2dith.png"); */
+  background-size: 1024px;
+  image-rendering: optimizespeed;
+  image-rendering: pixelated;
+}
+
+.column {
+    image-rendering: initial;
+}
+
+.columnsWrapper {
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+/* box+scrollbar base styling */
+
+.boxContent {
+  background: white;
+  overflow: scroll;
+  scrollbar-width: none;
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollBox {
+  scrollbar-width: none;
+}
+
+.scrollBar {
+    margin:0;
+    padding:0;
+    width:16px;
+    --scrollthumb-height: 40%;
+    appearance: slider-vertical;
+    -webkit-appearance: slider-vertical;
+}
+
+/* win95 specific stying */
+
+.win95.window{
+  --win95Color: #ccc;
+  --win95Gradient: linear-gradient(90deg, #048, #0ea);
+  padding:4px;
+  margin:24px;
+  background: var(--win95Color);
+  width: fit-content;
+  box-shadow:
+     inset -1px -1px 0px 0px black,
+     inset -2px -2px 0px 0px #0008,
+     inset 1px 1px 0px 0px var(--win95Color),
+     inset 2px 2px 0px 0px #FFFA,
+     8px 8px 0 0 #0004;
+}
+
+.win95.scrollBox{
+  border: white 1px solid;
+  border-color: black #FFFA #FFFA black;
+  height: 250px;
+  width: 300px;
+  display: flex;
+}
+
+.win95.titleBar {
+  height: 16px;
+  background: var(--win95Gradient);
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
+.win95 textarea {
+  align-self: stretch;
+  color: grey;
+}
+
+/* The following rules will only work for their respective browser */
+/* If you edit the styling, make sure to copy it to the other browser's rules or it will look very odd for those users */
+
+/* Firefox */
+
+input[type=range].scrollBar::-moz-range-thumb {
+  box-shadow:
+     inset -1px -1px 0px 0px black,
+     inset -2px -2px 0px 0px #0008,
+     inset 1px 1px 0px 0px var(--win95Color),
+     inset 2px 2px 0px 0px #FFFA;
+  height: var(--scrollthumb-height);
+  width: 16px;
+  border-radius: 0;
+  border: none;
+  background: var(--win95Color);
+  box-sizing: border-box;
+}
+
+input[type=range].scrollBar::-moz-range-track {
+  background: url("/img/2x2dith.png"), var(--win95Color);
+  background-blend-mode: overlay, normal;
+  width: 16px;
+  box-sizing: border-box;
+}
+
+/* Chromium */
+/* Chrome sucks ass so if your css doesnt look good on it, */
+/* just put a button on ur page that says "download firefox" */
+/* Then it's magically not your problem anymore */
+
+input[type=range].scrollBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  box-shadow:
+     inset -1px -1px 0px 0px black,
+     inset -2px -2px 0px 0px #0008,
+     inset 1px 1px 0px 0px var(--win95Color),
+     inset 2px 2px 0px 0px #FFFA,
+     inset 90px 90px 0px 0px var(--win95Color);
+  height: 90px;
+  width: 16px;
+  border-radius: 0;
+  border: none;
+  background: var(--win95Color);
+  box-sizing: border-box;
+}
+
+input[type=range].scrollBar::-webkit-slider-runnable-track {
+  background: url("/img/2x2dith.png"), var(--win95Color);
+  background-blend-mode: overlay, normal;
+  width: 16px;
+  box-sizing: border-box;
+}
+
+/* stuff to hide the default scrollbar for chrome don't edit */
+.boxContent::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  background: transparent;
+}
+
+</style>
+<script> 
+    // Custom Scrollbars Script by kiophen 2022
+    // Put this at the bottom of your page to make the scrollbars functional
+    
+    function setThumbsHeight() { // make the scrollbar thumbs the right height (firefox only) and add event listeners
+        bars = document.querySelectorAll(".scrollBar");
+        for (var i = 0; i<bars.length; i++) {
+          var hite = bars[i].previousElementSibling.clientHeight / bars[i].previousElementSibling.scrollHeight * 100 + "%"
+          bars[i].style.setProperty("--scrollthumb-height", hite); 
+        }
+    }
+    setTimeout(function(){setThumbsHeight()},500);
+    // do it after a delay because images will change the height of a box
+    setInterval(function(){setThumbsHeight()},10000);
+    // do it every 10 seconds in case someone uses this to have dynamic content
+    // like something a user will type something in idk
+    
+    bars = document.querySelectorAll(".scrollBar");
+        for (var i = 0; i<bars.length; i++) {
+          bars[i].oninput = function(){scrollBarUpdate(this)};
+        }
+    
+    boxes = document.querySelectorAll(".boxContent");
+    for (var i = 0; i<boxes.length; i++) {
+      boxes[i].onscroll = function(){boxContentUpdate(this)};
+    }
+    
+    function scrollBarUpdate(a) {
+      a.previousElementSibling.scrollTo(0,(1-a.value/100)*(a.previousElementSibling.scrollHeight-a.previousElementSibling.clientHeight));
+    }
+    
+    function boxContentUpdate(a) {
+      a.nextElementSibling.value=(1-a.scrollTop/(a.scrollHeight-a.clientHeight))*100;
+     }
+    </script>
