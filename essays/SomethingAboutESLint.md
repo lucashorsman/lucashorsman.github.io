@@ -1,14 +1,17 @@
 ---
 layout: essay
 type: essay
-title: "ESLint. It's Complicated" #rename me
+title: "ESLint: What's The Deal?" #rename me
 # All dates must be YYYY-MM-DD format!
 date: 2024-02-08
 published: true
 labels:
   - Programming
 ---
-*I do not understand why anyone would use [spaces over tabs](https://www.youtube.com/watch?v=SsoOG6ZeyUI), I mean, why not just use vim over emacs? I do use vim. Oh God!*
+*I do not understand why anyone would use spaces over tabs, I mean, why not just use vim over emacs? I do use vim. Oh God! -[Silicon Valley](https://www.youtube.com/watch?v=SsoOG6ZeyUI)*
+
+![alt text](lint.jpg "A Lint Roller!")
+
 
 Have you ever used a grammar checker (like Grammarly) while writing a paper? While those tools can be helpful during the paper-writing process, I find that having it active while drafting the initial paper is rather distracting. It's like constantly being reminded, "Hey! You put an Oxford comma here! Don't forget to come back and remove it!"—which is great information, but not when I'm simply trying to put words on paper and work through the writing process. However, it is useful afterward, during the draft-to-final process, for identifying those specific errors that are easy to overlook.
 
