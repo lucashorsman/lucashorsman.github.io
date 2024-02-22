@@ -6,7 +6,9 @@ title: "Bootstrap 5: Why?"
 date: 2024-02-22
 published: true
 labels:
-  - Programming - Web Dev -UI
+  - Programming 
+  - Web Dev
+  - UI
 ---
 
 # Introduction
