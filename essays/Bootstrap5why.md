@@ -15,9 +15,9 @@ HTML and CSS are some of the most important tools to web development. They under
 I have built only a few pages relying on Bootstrap 5, so I am not very familiar with all of the components included in the framework, but I can immediately see just how important utilization of these tools can be. Although it takes some fiddling with the classes and such, Bootstrap is a great help and massively reduces the time it takes to build a competent webpage. At this point I can pretty quickly construct a copy of a webpage with very little knowledge of the original website aside from a picture. This is basically what my software engineering course’s ‘Workout Of The Day's have been since we have started studying UI Frameworks. For example, I created a copy of [Island Snow’s](https://islandsnow.com/) web page using Bootstrap 5. Just note that their current website design is actually really cool now, I based my version off of an older version of their page.
 <table><tr>
 <td>
-<img src="islandsnowmine.png" alt="My version of Island Snow. " width="400"/>Mine</td>
+<img src="islandsnowmine.png" alt="My version of Island Snow. " width="600"/>Mine</td>
 
-<td><img src="islandsnowtheirs.png" alt="Island Snow's old webpage" width="400"/>Theirs</td>
+<td><img src="islandsnowtheirs.png" alt="Island Snow's old webpage" width="600"/>Theirs</td>
 
 </tr></table>
 
