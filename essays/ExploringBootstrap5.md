@@ -1,7 +1,7 @@
 ---
 layout: essay
 type: essay
-title: "Bootstrap 5: Why?"
+title: "Exploring Bootstrap 5: Simplifying Web Development"
 # All dates must be YYYY-MM-DD format!
 date: 2024-02-22
 published: true
