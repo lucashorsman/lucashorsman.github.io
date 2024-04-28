@@ -8,7 +8,6 @@ published: true
 labels:
   - Programming
   - Web Dev
-  - UI
 ---
 <img src="https://i.pinimg.com/736x/e1/25/35/e12535b0aa52905a4ca0a45dac0c82f1.jpg" alt="A couple types of roofs" width="200">
 
