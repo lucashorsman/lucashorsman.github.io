@@ -3,7 +3,7 @@ layout: project
 type: project
 image: projects\proftcg-logo.png
 title: "ProfTCG"
-priority: 1
+priority: 5
 date: 2024
 published: true
 labels:
