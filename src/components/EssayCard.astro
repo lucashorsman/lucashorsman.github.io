@@ -1,0 +1,178 @@
+---
+interface Props {
+  title: string;
+  summary?: string;
+  date?: string | number | Date;
+  slug: string;
+  labels?: string[];
+}
+
+const { title, summary, date, slug, labels = [] } = Astro.props;
+
+// Format date nicely
+let formattedDate = '';
+if (date) {
+  try {
+    const d = new Date(date);
+    if (!isNaN(d.getTime())) {
+      formattedDate = d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } else {
+      formattedDate = String(date);
+    }
+  } catch (e) {
+    formattedDate = String(date);
+  }
+}
+---
+
+<article class="essay-card glass-panel">
+  <div class="card-interior">
+    <div class="card-meta">
+      {formattedDate && (
+        <time class="post-date">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="calendar-icon">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          {formattedDate}
+        </time>
+      )}
+
+      {labels.length > 0 && (
+        <div class="labels-list">
+          {labels.slice(0, 2).map((label, idx) => (
+            <span class={idx === 0 ? 'badge badge-teal' : 'badge'}>{label}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <h3 class="essay-title">
+      <a href={`/essays/${slug}/`}>{title}</a>
+    </h3>
+
+    {summary && <p class="essay-summary">{summary}</p>}
+
+    <div class="card-footer">
+      <a href={`/essays/${slug}/`} class="read-more-link">
+        <span>Read Essay</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .essay-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+  }
+
+  .essay-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent-cyan);
+  }
+
+  .card-interior {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .post-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .calendar-icon {
+    color: var(--accent-cyan);
+  }
+
+  .labels-list {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .essay-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .essay-title a {
+    color: var(--text-heading);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .essay-title a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .essay-summary {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border-subtle);
+  }
+
+  .read-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .arrow-icon {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .read-more-link:hover {
+    color: var(--accent-teal);
+  }
+
+  .read-more-link:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+</style>

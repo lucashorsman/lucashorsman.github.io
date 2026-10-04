@@ -1,0 +1,402 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import bio from '../data/bio.json';
+import { getCollection } from 'astro:content';
+
+// Fetch projects
+const allProjects = await getCollection('projects', ({ data }) => data.published);
+const featuredProjects = allProjects
+  .sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0))
+  .slice(0, 4);
+
+// Fetch essays
+const allEssays = await getCollection('essays', ({ data }) => data.published);
+const recentEssays = allEssays
+  .sort((a, b) => {
+    const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return dateB - dateA;
+  })
+  .slice(0, 5);
+
+function formatDate(val: any) {
+  if (!val) return '';
+  try {
+    const d = new Date(val);
+    if (!isNaN(d.getTime())) {
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+  } catch (e) {}
+  return String(val);
+}
+---
+
+<BaseLayout title="Lucas Horsman" activeNav="home">
+  <main class="home-page">
+    <div class="container">
+      
+      <!-- TOP: Personal Info & Bio -->
+      <section class="intro-box box">
+        <div class="intro-layout">
+          <div class="intro-avatar-col">
+            <img
+              src={bio.basics.picture}
+              alt={bio.basics.name}
+              class="bio-avatar"
+              width="100"
+              height="100"
+            />
+          </div>
+          <div class="intro-text-col">
+            <h1 class="intro-heading">Lucas Horsman</h1>
+            <p class="intro-subtitle">
+              Computer Science student at the University of Hawaii at Manoa (expected Spring 2026).
+            </p>
+            <p class="intro-bio">
+              {bio.basics.summary} Outside of class, I tinker with robotics, video game development, Python automation scripts, and DJ for KTUH Honolulu.
+            </p>
+
+            <div class="intro-links">
+              <span class="intro-label">Links:</span>
+              <a href="https://github.com/lucashorsman" target="_blank" rel="noopener noreferrer">github</a>
+              <span class="sep">&bull;</span>
+              <a href="https://www.linkedin.com/in/lucas-horsman-b9b09523a/" target="_blank" rel="noopener noreferrer">linkedin</a>
+              <span class="sep">&bull;</span>
+              <a href={`mailto:${bio.basics.email}`}>email</a>
+              <span class="sep">&bull;</span>
+              <a href="/resume/">resume / cv</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS (Separated & Dedicated at top) -->
+      <section class="content-section">
+        <div class="section-title-bar">
+          <h2>Projects</h2>
+          <a href="/projects/" class="section-more-link">all projects ({allProjects.length}) &rarr;</a>
+        </div>
+        <p class="section-desc">
+          Software, robotics control systems, full-stack apps, and tools I've built:
+        </p>
+
+        <div class="project-entries">
+          {featuredProjects.map((project) => (
+            <article class="project-entry box">
+              <div class="entry-header">
+                <span class="entry-date">[{String(project.data.date)}]</span>
+                <h3 class="entry-title">
+                  <a href={`/projects/${project.id}/`}>{project.data.title}</a>
+                </h3>
+                {project.data.labels && project.data.labels.length > 0 && (
+                  <div class="entry-tags">
+                    {project.data.labels.map((label) => (
+                      <span class="tag">{label}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {project.data.summary && (
+                <p class="entry-summary">{project.data.summary}</p>
+              )}
+
+              <div class="entry-footer">
+                <a href={`/projects/${project.id}/`} class="read-link">
+                  read project writeup &rarr;
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- EXPERIMENTS & WEIRD LITTLE PROJECTS -->
+      <section class="content-section">
+        <div class="section-title-bar">
+          <h2>Experiments & Toys</h2>
+        </div>
+        <div class="box box-highlight">
+          <p>
+            <strong>A space for weird little side projects:</strong> Scripts, experiments, and playful web tools I build on weekends or for KTUH radio.
+          </p>
+          <ul class="experiments-list">
+            <li>
+              <a href="/projects/spinitronplaylist/">Spinitron Playlist Generator</a>
+              <span class="text-dim"> &mdash; Scrapes live KTUH radio playlists from Spinitron and creates Spotify playlists.</span>
+            </li>
+            <li>
+              <a href="/projects/spotipylikedgenerator/">Liked Songs Artist Sorter</a>
+              <span class="text-dim"> &mdash; Python + Spotipy automation to build dedicated artist sets from liked library.</span>
+            </li>
+            <li>
+              <a href="/projects/proftcg/">ProfTCG (Professor Card Game)</a>
+              <span class="text-dim"> &mdash; Digital collectible card game built for ICS faculty cards.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- BLOG POSTS & ESSAYS (Separated) -->
+      <section class="content-section">
+        <div class="section-title-bar">
+          <h2>Blog & Essays</h2>
+          <a href="/essays/" class="section-more-link">all essays ({allEssays.length}) &rarr;</a>
+        </div>
+        <p class="section-desc">
+          Notes, class essays, and thoughts on programming, tooling, and tech:
+        </p>
+
+        <div class="essay-entries">
+          {recentEssays.map((essay) => (
+            <article class="essay-row">
+              <div class="essay-meta-col">
+                <time class="post-date">{formatDate(essay.data.date)}</time>
+              </div>
+              <div class="essay-body-col">
+                <h3 class="essay-title">
+                  <a href={`/essays/${essay.id}/`}>{essay.data.title}</a>
+                </h3>
+                {essay.data.summary && (
+                  <p class="essay-snippet">{essay.data.summary}</p>
+                )}
+                {essay.data.labels && essay.data.labels.length > 0 && (
+                  <div class="essay-tags-inline">
+                    {essay.data.labels.map((l) => (
+                      <span class="tag">{l}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .home-page {
+    padding-bottom: 2rem;
+  }
+
+  /* Intro Box */
+  .intro-box {
+    margin-bottom: 2.5rem;
+  }
+
+  .intro-layout {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .intro-avatar-col {
+    flex-shrink: 0;
+  }
+
+  .bio-avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 1px dashed var(--border-dark);
+    padding: 2px;
+    background-color: var(--bg-card);
+  }
+
+  .intro-text-col {
+    flex-grow: 1;
+  }
+
+  .intro-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .intro-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.65rem;
+  }
+
+  .intro-bio {
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+    color: var(--text-main);
+  }
+
+  .intro-links {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .intro-label {
+    color: var(--text-dim);
+  }
+
+  .sep {
+    color: var(--text-dim);
+  }
+
+  /* Content Sections */
+  .content-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title-bar h2 {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .section-more-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Project Entries */
+  .project-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .project-entry {
+    margin-bottom: 0;
+  }
+
+  .entry-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .entry-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .entry-title {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .entry-tags {
+    display: flex;
+    gap: 0.35rem;
+    margin-left: auto;
+  }
+
+  .entry-summary {
+    font-size: 0.925rem;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-footer {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .read-link {
+    color: var(--accent);
+  }
+
+  /* Experiments */
+  .experiments-list {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .experiments-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .text-dim {
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+  }
+
+  /* Essay Entries (Blog Style) */
+  .essay-entries {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .essay-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1.25rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .essay-row:last-child {
+    border-bottom: none;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-dim);
+    display: inline-block;
+    padding-top: 0.15rem;
+  }
+
+  .essay-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .essay-snippet {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .essay-tags-inline {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  @media (max-width: 640px) {
+    .intro-layout {
+      flex-direction: column;
+    }
+    .essay-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .entry-tags {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

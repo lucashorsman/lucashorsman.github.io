@@ -1,0 +1,181 @@
+---
+interface Props {
+  activeNav?: 'home' | 'projects' | 'essays' | 'resume';
+}
+
+const { activeNav = 'home' } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="site-branding">
+        <a href="/" class="site-title">lucas horsman</a>
+        <span class="site-tagline">cs @ uh manoa &bull; honolulu, hi</span>
+      </div>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li>
+            <a href="/" class:list={[{ active: activeNav === 'home' }]}>
+              {activeNav === 'home' ? '[ home ]' : 'home'}
+            </a>
+          </li>
+          <li>
+            <a href="/projects/" class:list={[{ active: activeNav === 'projects' }]}>
+              {activeNav === 'projects' ? '[ projects ]' : 'projects'}
+            </a>
+          </li>
+          <li>
+            <a href="/essays/" class:list={[{ active: activeNav === 'essays' }]}>
+              {activeNav === 'essays' ? '[ blog ]' : 'blog'}
+            </a>
+          </li>
+          <li>
+            <a href="/resume/" class:list={[{ active: activeNav === 'resume' }]}>
+              {activeNav === 'resume' ? '[ resume ]' : 'resume'}
+            </a>
+          </li>
+          <li class="theme-li">
+            <button id="theme-toggle" class="theme-btn" title="Toggle dark/light mode">
+              <span class="theme-label-light">☼ light</span>
+              <span class="theme-label-dark">☾ dark</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-dark);
+    margin-bottom: 2.5rem;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .site-branding {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .site-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .site-title:hover {
+    color: var(--accent);
+  }
+
+  .site-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .site-nav {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.2rem 0.35rem;
+    border-radius: 2px;
+  }
+
+  .nav-list a:hover {
+    color: var(--accent);
+    background-color: var(--bg-box);
+  }
+
+  .nav-list a.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .theme-btn {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .theme-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--bg-box);
+  }
+
+  /* Show appropriate theme label */
+  :root .theme-label-light {
+    display: none;
+  }
+  :root .theme-label-dark {
+    display: inline;
+  }
+
+  :global([data-theme='dark']) .theme-label-light {
+    display: inline;
+  }
+  :global([data-theme='dark']) .theme-label-dark {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .nav-list {
+      gap: 0.65rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+</script>

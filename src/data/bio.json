@@ -1,0 +1,182 @@
+{
+  "basics": {
+    "name": "Lucas Horsman",
+    "label": "Robotics & Software Engineer • Computer Science Student",
+    "picture": "https://github.com/lucashorsman.png",
+    "email": "lhorsman@hawaii.edu",
+    "phone": "",
+    "website": "https://github.com/lucashorsman/",
+    "summary": "Computer Science student in the Department of Information and Computer Sciences at the University of Hawaii at Manoa (graduating Spring 2026). Specializing in robotics software, real-time control (GNC), sensor fusion, computer vision, and systems programming.",
+    "location": { "address": "", "postalCode": "96822", "city": "Honolulu", "countryCode": "USA", "region": "Hawaii" },
+    "profiles": [
+      { "network": "github", "username": "lucashorsman", "url": "https://github.com/lucashorsman" },
+      { "network": "linkedin", "username": "lucashorsman", "url": "https://www.linkedin.com/in/lucas-horsman-b9b09523a/" }
+    ]
+  },
+  "interests": [
+    { "name": "Robotics Control, Autonomous Vehicles, Computer Vision, Real-Time Systems, Embedded Systems, Video Game Development, Music (KTUH DJ), Sci-Fi" }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "keywords": [ "Python", "C", "C++", "C#", "HTML/CSS", "JavaScript", "SQL" ]
+    },
+    {
+      "name": "Robotics & Controls",
+      "keywords": [ "ROS2", "NAV2", "Kalman Filtering (EKF)", "RTK GPS", "PID Control", "micro-ROS", "CAN/CAN-FD" ]
+    },
+    {
+      "name": "Computer Vision",
+      "keywords": [ "OpenCV", "Image Stitching", "Camera Calibration (Homography)", "Projective Transformations" ]
+    },
+    {
+      "name": "Frameworks & Tools",
+      "keywords": [ "Linux", "Qt (PySide6)", "Git", "asyncio / Multithreading", "Raspberry Pi", "Teensy", "ESP32", "Arduino" ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Hawaii at Manoa",
+      "location": "Honolulu, HI",
+      "startDate": "August 2022",
+      "endDate": "Spring 2026 (Expected)",
+      "degree": "B.S. in Computer Science",
+      "gpa": "3.54"
+    },
+    {
+      "institution": "James Campbell High School",
+      "location": "Ewa Beach, HI",
+      "startDate": "August 2020",
+      "endDate": "May 2022",
+      "honors": [ "Summa Cum Laude", "Academic & CTE Honors", "Principal's List" ],
+      "gpa": "3.93"
+    }
+  ],
+  "work": [
+    {
+      "company": "UCO / Lick Observatory",
+      "position": "Software Developer Intern — FOBOS Control System",
+      "startDate": "June 2026",
+      "endDate": "August 2026",
+      "responsibilities": [
+        "Built a PySide6 GUI with Model-View-Controller (MVC) architecture to control a set of robotic fiber positioners, integrating GigE Vision camera feeds and CAN bus communication.",
+        "Designed a homography-based calibration system mapping camera pixels to focal plane coordinates.",
+        "Diagnosed a VPN/GigE Vision protocol incompatibility blocking camera integration; designed and deployed a Raspberry Pi 5 hardware bridge to resolve it."
+      ]
+    },
+    {
+      "company": "RIP Laboratory",
+      "position": "Robotics Software Engineer Research Assistant",
+      "startDate": "May 2024",
+      "endDate": "May 2026",
+      "responsibilities": [
+        "Built a real-time guidance, navigation, and control system (GNC) for a differential-drive robot using ROS2, NAV2, EKF sensor fusion, and LiDAR, enabling automated patrol routes and repeatable odometry testing.",
+        "Diagnosed and resolved intermittent low-level hardware faults in sensor and motor controller interfaces, isolating root causes across firmware and communication layers.",
+        "Deployed a Zenoh-based pub/sub architecture to route messages between desktop and robot over network links, addressing discovery limitations of default DDS transport across VPN-bridged networks.",
+        "Experimented with alternative methods of localization utilizing computer vision techniques and Time-of-Flight sensors.",
+        "Authored publication-ready technical documentation for the system."
+      ]
+    },
+    {
+      "company": "Farm Robotics Challenge",
+      "position": "Control Team Lead",
+      "startDate": "January 2025",
+      "endDate": "May 2026",
+      "responsibilities": [
+        "Deployed and field-tested an autonomous ROS2 navigation system on a physical rover operating in an unstructured agricultural environment, using RTK localization for real-time path planning.",
+        "Led development of a ROS2 system for an autonomous tree-climbing robot, integrating MCUs, micro-ROS, and motor controllers under a central control package.",
+        "Built an image-stitching pipeline for overhead field data collection."
+      ]
+    },
+    {
+      "company": "Autonomous RC Car State Estimation & Control",
+      "position": "Lead Developer — Capstone Project (ICS 496)",
+      "startDate": "August 2025",
+      "endDate": "December 2025",
+      "responsibilities": [
+        "Built a simple controller for an Arduino based remote controlled car.",
+        "Designed a Kalman filter fusing IMU acceleration with dead-reckoning speed to localize a robot with no wheel encoders.",
+        "Built ESP32–Arduino communication pipeline with an HTTP/JSON API and GUI for path planning and live pose visualization, under 2KB RAM constraints."
+      ]
+    },
+    {
+      "company": "Keiki Coders",
+      "position": "VR and Game Development Teacher",
+      "startDate": "August 2024",
+      "endDate": "August 2025",
+      "responsibilities": [
+        "Taught weekly programming fundamentals (languages, variables, control structures) to 3rd–8th grade students via original curriculum.",
+        "Adapted teaching style and pacing across a wide age range, balancing structured curriculum with public speaking and improvisation to keep varying skill levels engaged."
+      ]
+    },
+    {
+      "company": "Center for Language & Technology",
+      "position": "Computer Lab Monitor",
+      "startDate": "August 2022",
+      "endDate": "May 2024",
+      "responsibilities": [
+        "Provided direct technical assistance and hardware/software troubleshooting for computer lab users.",
+        "Maintained lab infrastructure, ensuring reliable workstation performance and network availability."
+      ]
+    },
+    {
+      "company": "Saber Dynamics",
+      "position": "Head Programmer",
+      "startDate": "September 2021",
+      "endDate": "April 2022",
+      "responsibilities": [
+        "Developed the robot’s primary control system, autonomous control, and auxiliary functions through expert programming, driving efficient and effective performance of the club's robotic systems.",
+        "Demonstrated strong leadership skills by training the electronics team on electrical and pneumatic systems for the robot, enhancing the team's technical knowledge and abilities.",
+        "Created and implemented innovative solutions to complex problems, streamlining testing processes and contributing to the club's success."
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Ewa Beach Drive in Theater",
+      "position": "Chief Technology Officer",
+      "startDate": "September 2020",
+      "endDate": "April 2022",
+      "responsibilities": [
+        "Orchestrated all A/V needs for the theater, ensuring seamless and high-quality movie experiences for patrons.",
+        "Revitalized the theater's online presence by designing and regularly updating the theater's website, increasing visibility and sales.",
+        "Provided instruction to students on how to operate theater equipment such as projectors and headphones, enriching their knowledge and experience in audio-visual technologies."
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Judges' Choice Award",
+      "event": "ICS 496 Capstone Showcase",
+      "date": "December 2025"
+    },
+    {
+      "title": "Air Productivity Award",
+      "event": "Farm Robotics Challenge",
+      "date": "May 2025"
+    },
+    {
+      "title": "Regional Champion",
+      "event": "First Robotics Challenge (FRC 8871)",
+      "date": "April 2022"
+    },
+    {
+      "title": "Pele Award Winner",
+      "event": "Pele Awards",
+      "date": "May 2022"
+    },
+    {
+      "title": "Congressional Art Contest",
+      "event": "Bishop Museum",
+      "date": "April 2022"
+    },
+    {
+      "title": "Robotics Skills Champion",
+      "event": "Vex Robotics Competition",
+      "date": "March 2020"
+    }
+  ],
+  "references": [
+    "Available upon request"
+  ]
+}

@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects', ({ data }) => data.published);
+const sortedProjects = allProjects.sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0));
+
+// Extract unique labels
+const allLabels = Array.from(new Set(allProjects.flatMap((p) => p.data.labels || []))).sort();
+---
+
+<BaseLayout
+  title="Projects | Lucas Horsman"
+  description="Robotics, tools, full-stack applications, and experiments by Lucas Horsman."
+  activeNav="projects"
+>
+  <main class="projects-page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Projects &amp; Experiments</h1>
+        <p class="page-subtitle">
+          A list of things I've built, including robotics control systems, web apps, automation scripts, and small tools.
+        </p>
+
+        {allLabels.length > 0 && (
+          <div class="filter-row">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn active" data-filter="all">All ({sortedProjects.length})</button>
+            {allLabels.map((label) => (
+              <button class="filter-btn" data-filter={label.toLowerCase()}>
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="project-list" id="project-list">
+        {sortedProjects.map((project) => (
+          <article class="project-item box" data-labels={(project.data.labels || []).map((l) => l.toLowerCase()).join(',')}>
+            <div class="project-item-top">
+              <span class="project-year">[{String(project.data.date)}]</span>
+              <h2 class="project-item-title">
+                <a href={`/projects/${project.id}/`}>{project.data.title}</a>
+              </h2>
+              {project.data.labels && project.data.labels.length > 0 && (
+                <div class="project-tags">
+                  {project.data.labels.map((l) => (
+                    <span class="tag">{l}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {project.data.summary && (
+              <p class="project-desc">{project.data.summary}</p>
+            )}
+
+            <div class="project-actions">
+              <a href={`/projects/${project.id}/`} class="btn">
+                read writeup &rarr;
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding-bottom: 3rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .filter-row {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .filter-label {
+    color: var(--text-dim);
+  }
+
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+    padding: 0.2rem 0.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .project-item {
+    margin-bottom: 0;
+  }
+
+  .project-item.hidden {
+    display: none;
+  }
+
+  .project-item-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-year {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .project-item-title {
+    font-size: 1.2rem;
+    margin: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.35rem;
+    margin-left: auto;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .project-tags {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>
+
+<script is:inline>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      projectItems.forEach((item) => {
+        if (filter === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const itemLabels = item.getAttribute('data-labels') || '';
+          if (itemLabels.split(',').includes(filter)) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+</script>

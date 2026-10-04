@@ -1,0 +1,77 @@
+---
+import bio from '../data/bio.json';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-divider"></div>
+    <div class="footer-content">
+      <div class="footer-links">
+        <span>Connect:</span>
+        <a href="https://github.com/lucashorsman" target="_blank" rel="noopener noreferrer">github</a>
+        <span>&bull;</span>
+        <a href="https://www.linkedin.com/in/lucas-horsman-b9b09523a/" target="_blank" rel="noopener noreferrer">linkedin</a>
+        <span>&bull;</span>
+        <a href={`mailto:${bio.basics.email}`}>email</a>
+        <span>&bull;</span>
+        <a href="/resume/">resume</a>
+      </div>
+
+      <div class="footer-meta">
+        <span>&copy; {currentYear} Lucas Horsman &bull; <a href="#top" class="back-to-top">[↑ top]</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .footer-divider {
+    border-top: 1px dashed var(--border-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links span {
+    color: var(--text-dim);
+  }
+
+  .back-to-top {
+    text-decoration: none;
+    color: var(--text-dim);
+  }
+
+  .back-to-top:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

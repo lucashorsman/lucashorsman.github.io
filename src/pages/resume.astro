@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import bio from '../data/bio.json';
+
+const { basics, education, work, skills, volunteer, awards, interests } = bio;
+
+function formatRange(start?: string, end?: string) {
+  if (!start && !end) return '';
+  if (start && end) return `${start} – ${end}`;
+  return start || end || '';
+}
+---
+
+<BaseLayout
+  title={`Resume / CV | ${basics.name}`}
+  description={`Resume and CV for ${basics.name} - Computer Science Student at the University of Hawaii at Manoa.`}
+  activeNav="resume"
+>
+  <main class="resume-page">
+    <div class="container">
+      <div class="resume-top-nav">
+        <a href="/" class="back-link">&larr; home</a>
+        <button onclick="window.print()" class="btn print-btn">
+          [ print / save pdf ]
+        </button>
+      </div>
+
+      <article class="resume-sheet box">
+        <!-- Header -->
+        <header class="resume-header">
+          <h1 class="candidate-name">{basics.name}</h1>
+          <p class="candidate-headline">
+            {basics.label} &bull; University of Hawaii at Manoa
+          </p>
+
+          <div class="contact-line">
+            <span>{basics.location.city}, {basics.location.region}</span>
+            <span class="sep">&bull;</span>
+            <a href={`mailto:${basics.email}`}>{basics.email}</a>
+            <span class="sep">&bull;</span>
+            <a href="https://github.com/lucashorsman" target="_blank" rel="noopener noreferrer">github.com/lucashorsman</a>
+            <span class="sep">&bull;</span>
+            <a href="https://www.linkedin.com/in/lucas-horsman-b9b09523a/" target="_blank" rel="noopener noreferrer">linkedin</a>
+          </div>
+
+          <p class="summary-text">{basics.summary}</p>
+        </header>
+
+        <!-- Technical Skills & Certifications -->
+        {skills && skills.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Skills &amp; Certifications</h2>
+            <div class="skills-rows">
+              {skills.map((sg) => (
+                <div class="skill-row">
+                  <span class="skill-label">{sg.name}:</span>
+                  <span class="skill-list">{sg.keywords.join(', ')}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Work & Project Experience -->
+        {work && work.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Work &amp; Project Experience</h2>
+            <div class="entries-list">
+              {work.map((job) => (
+                <div class="resume-entry">
+                  <div class="entry-line-1">
+                    <span class="entry-org"><strong>{job.company}</strong></span>
+                    <span class="entry-dates">{formatRange(job.startDate, job.endDate)}</span>
+                  </div>
+                  <div class="entry-line-2">
+                    <span class="entry-role">{job.position}</span>
+                  </div>
+                  {job.responsibilities && job.responsibilities.length > 0 && (
+                    <ul class="resume-bullets">
+                      {job.responsibilities.map((r) => <li>{r}</li>)}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Education -->
+        {education && education.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Education</h2>
+            <div class="entries-list">
+              {education.map((edu) => (
+                <div class="resume-entry">
+                  <div class="entry-line-1">
+                    <span class="entry-org"><strong>{edu.institution}</strong> {edu.location ? `— ${edu.location}` : ''}</span>
+                    <span class="entry-dates">{formatRange(edu.startDate, edu.endDate)}</span>
+                  </div>
+                  <div class="entry-line-2">
+                    <span class="entry-role">{edu.degree || 'High School Diploma'}</span>
+                    {edu.gpa && <span class="entry-gpa">GPA: {edu.gpa}</span>}
+                  </div>
+                  {edu.honors && edu.honors.length > 0 && (
+                    <div class="entry-honors">
+                      Honors: {edu.honors.join(', ')}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Leadership & Activities -->
+        {volunteer && volunteer.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Leadership &amp; Activities</h2>
+            <div class="entries-list">
+              {volunteer.map((v) => (
+                <div class="resume-entry">
+                  <div class="entry-line-1">
+                    <span class="entry-org"><strong>{v.organization}</strong></span>
+                    <span class="entry-dates">{formatRange(v.startDate, v.endDate)}</span>
+                  </div>
+                  <div class="entry-line-2">
+                    <span class="entry-role">{v.position}</span>
+                  </div>
+                  {v.responsibilities && v.responsibilities.length > 0 && (
+                    <ul class="resume-bullets">
+                      {v.responsibilities.map((r) => <li>{r}</li>)}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Awards & Accomplishments -->
+        {awards && awards.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Awards &amp; Accomplishments</h2>
+            <ul class="awards-list">
+              {awards.map((a) => (
+                <li>
+                  <strong>{a.title}</strong>
+                  {a.event ? ` | ${a.event}` : ''}
+                  <span class="text-dim"> | {a.date}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- Interests -->
+        {interests && interests.length > 0 && (
+          <section class="resume-block">
+            <h2 class="block-title">Interests</h2>
+            <p class="interests-line">{interests.map((i) => i.name).join(' ')}</p>
+          </section>
+        )}
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .resume-page {
+    padding-bottom: 4rem;
+  }
+
+  .resume-top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .resume-sheet {
+    padding: 2.5rem 2rem;
+  }
+
+  .resume-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-dark);
+  }
+
+  .candidate-name {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .candidate-headline {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-bottom: 0.65rem;
+  }
+
+  .contact-line {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .summary-text {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  /* Blocks */
+  .resume-block {
+    margin-bottom: 2.25rem;
+  }
+
+  .block-title {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Skills */
+  .skills-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.925rem;
+  }
+
+  .skill-row {
+    line-height: 1.6;
+  }
+
+  .skill-label {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-right: 0.5rem;
+  }
+
+  .skill-list {
+    color: var(--text-muted);
+  }
+
+  /* Entries */
+  .entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .resume-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .entry-line-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 1rem;
+    color: var(--text-heading);
+  }
+
+  .entry-dates {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .entry-line-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent);
+  }
+
+  .entry-gpa {
+    font-size: 0.825rem;
+    color: var(--text-dim);
+  }
+
+  .entry-honors {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .resume-bullets {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-size: 0.925rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .resume-bullets li {
+    margin-bottom: 0.4rem;
+  }
+
+  .awards-list {
+    font-size: 0.925rem;
+    line-height: 1.7;
+  }
+
+  .interests-line {
+    font-size: 0.925rem;
+    color: var(--text-muted);
+  }
+
+  /* Print Styles */
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+    .site-header, .site-footer, .resume-top-nav {
+      display: none !important;
+    }
+    .box {
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .resume-sheet {
+      padding: 1.5rem 1rem;
+    }
+    .entry-line-1 {
+      flex-direction: column;
+    }
+    .entry-dates {
+      margin-left: 0;
+      margin-top: 0.2rem;
+    }
+  }
+</style>

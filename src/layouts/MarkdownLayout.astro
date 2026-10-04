@@ -1,0 +1,184 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    summary?: string;
+    date?: string | number | Date;
+    image?: string;
+    labels?: string[];
+  };
+  backUrl?: string;
+  backLabel?: string;
+  activeNav?: 'projects' | 'essays';
+}
+
+const {
+  frontmatter,
+  backUrl = '/essays/',
+  backLabel = '← back to blog',
+  activeNav = 'essays',
+} = Astro.props;
+
+// Format date nicely
+let formattedDate = '';
+if (frontmatter.date) {
+  try {
+    const d = new Date(frontmatter.date);
+    if (!isNaN(d.getTime())) {
+      formattedDate = d.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    } else {
+      formattedDate = String(frontmatter.date);
+    }
+  } catch (e) {
+    formattedDate = String(frontmatter.date);
+  }
+}
+---
+
+<BaseLayout
+  title={`${frontmatter.title} | Lucas Horsman`}
+  description={frontmatter.summary || frontmatter.title}
+  activeNav={activeNav}
+>
+  <main class="article-page">
+    <div class="container">
+      <nav class="back-nav">
+        <a href={backUrl} class="back-link">{backLabel}</a>
+      </nav>
+
+      <article class="post-article">
+        <header class="post-header">
+          <h1 class="post-title">{frontmatter.title}</h1>
+          <div class="post-meta">
+            {formattedDate && <time class="post-date">{formattedDate}</time>}
+            {frontmatter.labels && frontmatter.labels.length > 0 && (
+              <span class="meta-sep">&bull;</span>
+              <div class="meta-tags">
+                {frontmatter.labels.map((l) => (
+                  <span class="tag">{l}</span>
+                ))}
+              </div>
+            )}
+          </div>
+          {frontmatter.summary && (
+            <p class="post-summary-lead">{frontmatter.summary}</p>
+          )}
+        </header>
+
+        <div class="post-content prose">
+          <slot />
+        </div>
+
+        <footer class="post-footer">
+          <div class="footer-rule"></div>
+          <div class="post-footer-nav">
+            <a href={backUrl}>{backLabel}</a>
+            <a href="#top">[↑ top]</a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .article-page {
+    padding-bottom: 4rem;
+  }
+
+  .back-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-article {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-dark);
+  }
+
+  .post-title {
+    font-size: 1.85rem;
+    line-height: 1.25;
+    margin-bottom: 0.65rem;
+  }
+
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+  }
+
+  .meta-sep {
+    color: var(--text-dim);
+  }
+
+  .meta-tags {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .post-summary-lead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+
+  .post-content {
+    margin-top: 1.5rem;
+  }
+
+  .post-footer {
+    margin-top: 3rem;
+  }
+
+  .footer-rule {
+    border-top: 1px dashed var(--border-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .post-footer-nav {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (max-width: 640px) {
+    .post-article {
+      padding: 1.5rem 1rem;
+    }
+    .post-title {
+      font-size: 1.45rem;
+    }
+  }
+</style>

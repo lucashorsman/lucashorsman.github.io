@@ -1,0 +1,217 @@
+---
+interface Props {
+  title: string;
+  summary?: string;
+  date: string | number | Date;
+  image?: string;
+  slug: string;
+  labels?: string[];
+  priority?: number;
+}
+
+const { title, summary, date, image, slug, labels = [], priority = 0 } = Astro.props;
+
+// Normalize image path for web static serving
+let resolvedImage = image;
+if (resolvedImage) {
+  resolvedImage = resolvedImage.replace(/\\/g, '/');
+  if (resolvedImage.startsWith('../')) {
+    resolvedImage = resolvedImage.substring(2);
+  }
+  if (!resolvedImage.startsWith('/')) {
+    resolvedImage = '/' + resolvedImage;
+  }
+}
+---
+
+<article class="project-card glass-panel">
+  {resolvedImage ? (
+    <div class="project-image-wrapper">
+      <img src={resolvedImage} alt={title} loading="lazy" class="project-image" />
+      <div class="image-gloss-sheen" aria-hidden="true"></div>
+      <span class="date-badge">{String(date)}</span>
+    </div>
+  ) : (
+    <div class="project-placeholder-wrapper">
+      <div class="ocean-water-mesh"></div>
+      <span class="date-badge">{String(date)}</span>
+    </div>
+  )}
+
+  <div class="project-content">
+    {labels.length > 0 && (
+      <div class="labels-container">
+        {labels.map((label, idx) => {
+          const badgeClass = idx % 3 === 0 ? 'badge' : idx % 3 === 1 ? 'badge badge-teal' : 'badge badge-emerald';
+          return <span class={badgeClass}>{label}</span>;
+        })}
+      </div>
+    )}
+
+    <h3 class="project-title">
+      <a href={`/projects/${slug}/`}>{title}</a>
+    </h3>
+
+    {summary && <p class="project-summary">{summary}</p>}
+
+    <div class="project-footer">
+      <a href={`/projects/${slug}/`} class="project-link">
+        <span>View Project</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent-cyan);
+  }
+
+  .project-image-wrapper, .project-placeholder-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(45, 212, 191, 0.2));
+    overflow: hidden;
+    border-bottom: 1px solid var(--card-border-subtle);
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover .project-image {
+    transform: scale(1.05);
+  }
+
+  /* Frutiger Aero Gloss Sheen on the image */
+  .image-gloss-sheen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.0) 100%);
+    pointer-events: none;
+  }
+
+  :global([data-theme='dark']) .image-gloss-sheen {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .ocean-water-mesh {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(56, 189, 248, 0.35) 0%, transparent 60%),
+                linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(16, 185, 129, 0.2));
+  }
+
+  .date-badge {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    padding: 0.25rem 0.65rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  :global([data-theme='dark']) .date-badge {
+    background: rgba(8, 24, 40, 0.85);
+    border-color: rgba(64, 224, 208, 0.3);
+    color: var(--text-heading);
+  }
+
+  .project-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .labels-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.65rem;
+    line-height: 1.35;
+  }
+
+  .project-title a {
+    color: var(--text-heading);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .project-title a:hover {
+    color: var(--accent-cyan);
+  }
+
+  .project-summary {
+    font-size: 0.925rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    border-top: 1px solid var(--card-border-subtle);
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .arrow-icon {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-link:hover {
+    color: var(--accent-teal);
+  }
+
+  .project-link:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+</style>

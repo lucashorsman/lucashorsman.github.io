@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allEssays = await getCollection('essays', ({ data }) => data.published);
+const sortedEssays = allEssays.sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+// Extract unique labels
+const allLabels = Array.from(new Set(allEssays.flatMap((e) => e.data.labels || []))).sort();
+
+function formatDate(val: any) {
+  if (!val) return '';
+  try {
+    const d = new Date(val);
+    if (!isNaN(d.getTime())) {
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+  } catch (e) {}
+  return String(val);
+}
+---
+
+<BaseLayout
+  title="Blog & Essays | Lucas Horsman"
+  description="Personal blog posts and technical essays by Lucas Horsman."
+  activeNav="essays"
+>
+  <main class="essays-page">
+    <div class="container">
+      <header class="page-header">
+        <h1>Blog &amp; Essays</h1>
+        <p class="page-subtitle">
+          Long-form writing, course essays for ICS, reflections on software engineering, and other thoughts.
+        </p>
+
+        {allLabels.length > 0 && (
+          <div class="filter-row">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn active" data-filter="all">All ({sortedEssays.length})</button>
+            {allLabels.map((label) => (
+              <button class="filter-btn" data-filter={label.toLowerCase()}>
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="essay-list" id="essay-list">
+        {sortedEssays.map((essay) => (
+          <article class="essay-item" data-labels={(essay.data.labels || []).map((l) => l.toLowerCase()).join(',')}>
+            <div class="essay-item-meta">
+              <time class="post-date">{formatDate(essay.data.date)}</time>
+              {essay.data.labels && essay.data.labels.length > 0 && (
+                <div class="essay-tags">
+                  {essay.data.labels.map((l) => (
+                    <span class="tag">{l}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <h2 class="essay-item-title">
+              <a href={`/essays/${essay.id}/`}>{essay.data.title}</a>
+            </h2>
+
+            {essay.data.summary && (
+              <p class="essay-snippet">{essay.data.summary}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .essays-page {
+    padding-bottom: 3rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .filter-row {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .filter-label {
+    color: var(--text-dim);
+  }
+
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+    padding: 0.2rem 0.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+  }
+
+  .essay-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .essay-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .essay-item:last-child {
+    border-bottom: none;
+  }
+
+  .essay-item.hidden {
+    display: none;
+  }
+
+  .essay-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-dim);
+  }
+
+  .essay-tags {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .essay-item-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .essay-snippet {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+</style>
+
+<script is:inline>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const essayItems = document.querySelectorAll('.essay-item');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      essayItems.forEach((item) => {
+        if (filter === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const itemLabels = item.getAttribute('data-labels') || '';
+          if (itemLabels.split(',').includes(filter)) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+</script>
