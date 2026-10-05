@@ -6,8 +6,12 @@ import { getCollection } from 'astro:content';
 // Fetch projects
 const allProjects = await getCollection('projects', ({ data }) => data.published);
 const featuredProjects = allProjects
-  .sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0))
-  .slice(0, 4);
+  .sort((a, b) => {
+    const pDiff = (b.data.priority || 0) - (a.data.priority || 0);
+    if (pDiff !== 0) return pDiff;
+    return Number(b.data.date || 0) - Number(a.data.date || 0);
+  })
+  .slice(0, 6);
 
 // Fetch essays
 const allEssays = await getCollection('essays', ({ data }) => data.published);
